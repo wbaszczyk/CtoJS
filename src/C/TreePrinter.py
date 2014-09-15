@@ -118,9 +118,11 @@ class TreePrinter:
 		global level
 		level += 1
 		
+		print "(",
 		self.op1.printTree()
 		printFun(self.type)
 		self.op2.printTree()
+		print ")",
 		
 		level -= 1
 
@@ -139,7 +141,6 @@ class TreePrinter:
 
 	@addToClass(AST.Instructions)
 	def printTree(self):
-
 		for i in self.ins:
 			i.printTree()
 
@@ -148,8 +149,9 @@ class TreePrinter:
 		global level
 		level += 1
 		
-		printFun("PRINT")
+		printFun("console.log(")
 		self.exp.printTree()
+		print ")"
 		
 		level -= 1
 
@@ -200,9 +202,12 @@ class TreePrinter:
 		global level
 		level += 1
 		
-		printFun("WHILE")
+		printFun("while")
 		self.cond.printTree()
+		print "{"
 		self.ins.printTree()
+		print
+		print "}"
 		
 		level -= 1
 
@@ -224,7 +229,7 @@ class TreePrinter:
 		
 		printFun("return")
 		self.exp.printTree()
-		
+		print
 		level -= 1
 
 	@addToClass(AST.ContinueInstruction)
@@ -232,7 +237,7 @@ class TreePrinter:
 		global level
 		level += 1
 		
-		printFun("CONTINUE")
+		printFun("continue")
 		
 		level -= 1
 
@@ -241,7 +246,7 @@ class TreePrinter:
 		global level
 		level += 1
 		
-		printFun("BREAK")
+		printFun("break")
 		
 		level -= 1
 
@@ -252,9 +257,9 @@ class TreePrinter:
 
 	@addToClass(AST.Condition)
 	def printTree(self):
-		print "(",
+		# print "(",
 		self.exp.printTree()
-		print ")"
+		# print ")"
 
 	@addToClass(AST.ExpressionList)
 	def printTree(self):
